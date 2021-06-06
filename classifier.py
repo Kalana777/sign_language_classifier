@@ -54,10 +54,10 @@ train_datagen = ImageDataGenerator(
     #     horizontal_flip=True,
     fill_mode='nearest'
 )
-from tensorflow.keras.utils import to_categorical
+# from tensorflow.keras.utils import to_categorical
 
-training_labels = to_categorical(training_labels)
-testing_labels = to_categorical(testing_labels)
+# training_labels = to_categorical(training_labels)
+# testing_labels = to_categorical(testing_labels)
 training_generator = train_datagen.flow(
     training_images,
     training_labels,
@@ -89,7 +89,7 @@ model = tf.keras.models.Sequential([
 ])
 
 # Compile Model.
-model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+model.compile(loss = 'sparse_categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
 
 # Train
