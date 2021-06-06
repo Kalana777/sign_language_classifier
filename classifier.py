@@ -7,7 +7,6 @@ from os import getcwd
 
 def get_data(filename):
     with open(filename) as training_file:
-        # Your code starts here
         csv_reader = csv.reader(training_file, delimiter=',')
         line_count = 0
 
@@ -26,7 +25,6 @@ def get_data(filename):
 
         labels = np.array(labels)
         images = np.array(image_list).astype('int')
-    # Your code ends here
     return images, labels
 
 
@@ -51,7 +49,6 @@ train_datagen = ImageDataGenerator(
     height_shift_range=0.2,
     shear_range=0.2,
     zoom_range=0.2,
-    #     horizontal_flip=True,
     fill_mode='nearest'
 )
 from tensorflow.keras.utils import to_categorical
@@ -73,7 +70,6 @@ validation_generator = validation_datagen.flow(
     batch_size=32
 )
 
-# Keep These
 print(training_images.shape)
 print(testing_images.shape)
 
@@ -97,6 +93,7 @@ history = model.fit_generator(training_generator, epochs=30, steps_per_epoch=len
 
 model.evaluate(testing_images, testing_labels, verbose=0)
 
+#accuracy vs epoch plotting
 import matplotlib.pyplot as plt
 
 acc = history.history['accuracy']
@@ -112,6 +109,7 @@ plt.title('Training and validation accuracy')
 plt.legend()
 plt.figure()
 
+#check for overfitting
 plt.plot(epochs, loss, 'r', label='Training Loss')
 plt.plot(epochs, val_loss, 'b', label='Validation Loss')
 plt.title('Training and validation loss')
